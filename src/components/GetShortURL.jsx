@@ -44,7 +44,7 @@ const GetShortURL = () => {
     }
 
   return (
-    <div className="flex flex-row items-center justify-center w-screen text-center">
+    <div className="flex flex-col items-center justify-center w-screen gap-2 text-center">
         <div className="w-60 sm:w-96">
             <label htmlFor="fullURL" className="block mb-2 text-sm font-medium dark:text-white">Search</label>
 
