@@ -111,15 +111,22 @@ const FrontComponent = ({pgHeading, handleClick, response, setResponse}) => {
       { // show error and message
         response.error ? <p className="text-xs text-red-500 " >{response.error}</p> : 
         response.data ? <p className="text-xs text-green-500 " >{response.data}</p> : 
-        response.message ? <p className="text-xs text-green-500 " >{response.message} go to the login page</p> : ''
-         
+        response.message ? <p className="text-xs text-center text-green-500" >
+          <p>confirmation email has beem sent</p>
+          <p>Go to login Page</p>
+        </p> :
+        response.temp_message ? <p className="text-xs text-green-500 " >{response.message}</p> : ''
+        
       }
 
       <button type="button" className="px-5 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 me-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-      onClick={pgHeading === 'Login' ? () => handleClick(user) : () => handleClick({
-        ...user,
-        ...newUser
-      })}
+      onClick={pgHeading === 'Login' ? () => handleClick(user) : () => {
+        setResponse({temp_message: 'Registering user....'});
+        handleClick({
+          ...user,
+          ...newUser
+        })
+      }}
       >
         {pgHeading === 'Login' ? 'Sign In' : 'Sign Up' }
       </button>

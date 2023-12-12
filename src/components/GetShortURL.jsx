@@ -1,7 +1,8 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react"
 import { API } from "../helpers/API";
 
-const GetShortURL = () => {
+const GetShortURL = ({setInac, setShortUrlData}) => {
 
     const [url, setUrl] = useState('');
     const [err, setErr] = useState('');
@@ -20,6 +21,7 @@ const GetShortURL = () => {
             setErr('Field are Required');
             return
         }
+
         fetch(URL, {
             method: 'POST',
             headers: {
@@ -35,7 +37,11 @@ const GetShortURL = () => {
             if(data.acknowledged){
                 setErr('');
                 setMes(data.message);
+                setShortUrlData((prev) => ([data.newURL, ...prev]) );
             }else{
+                if(data.inactive){
+                    setInac(true)
+                }
                 setErr(data.error);
                 setMes('');
             }
