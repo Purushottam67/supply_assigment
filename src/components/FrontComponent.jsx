@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 import { useNavigate } from "react-router-dom"
+import { API } from "../helpers/API";
 
 const FrontComponent = ({pgHeading, handleClick, response, setResponse}) => {
 
@@ -30,10 +31,34 @@ const FrontComponent = ({pgHeading, handleClick, response, setResponse}) => {
     }))
   }
 
+  const URL = `${API}/signup/resendemail`
+
+  function resendEmail(){
+    setResponse({temp_message: 'Resending Email'});
+    fetch(URL, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            email: user.email
+        })
+    })
+    .then((data) => data.json())
+    .then((data) => {
+        if(data.acknowledged){
+          setResponse({message: data.message});
+        }else{
+          setResponse({error: data.error});
+        }
+    })
+    .catch((err) => console.log(err))
+  }
+
   const navigate = useNavigate();
 
   return (
-    <div className="flex flex-col gap-3 m-auto justify-center items-center px-3 sm:px-5 rounded-lg shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px] pt-3 pb-5 bg-slate-200">
+    <div className="flex flex-col gap-3 m-auto justify-center items-center px-3 sm:px-5 rounded-lg shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px] pt-3 pb-5 bg-slate-200 max-w-sm">
 
 
       <p className="text-lg font-bold" >
@@ -109,13 +134,18 @@ const FrontComponent = ({pgHeading, handleClick, response, setResponse}) => {
       </div> 
 
       { // show error and message
-        response.error ? <p className="text-xs text-red-500 " >{response.error}</p> : 
-        response.data ? <p className="text-xs text-green-500 " >{response.data}</p> : 
+        response.error ? <p className="text-xs text-center text-red-500" >{response.error} {
+          response.active ? 
+          <span className="text-center text-cyan-700"
+          onClick={() => resendEmail()}
+          > <span>-</span> Resend Email</span> : ''
+        }</p> : 
+        response.data ? <p className="text-xs text-center text-green-500" >{response.data}</p> : 
         response.message ? <p className="text-xs text-center text-green-500" >
           <p>confirmation email has beem sent</p>
-          <p>Go to login Page</p>
+          <p>verify yout account to login</p>
         </p> :
-        response.temp_message ? <p className="text-xs text-green-500 " >{response.message}</p> : ''
+        response.temp_message ? <p className="text-xs text-center text-green-500" >{response.temp_message}</p> : ''
         
       }
 

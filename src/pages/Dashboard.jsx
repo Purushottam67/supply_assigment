@@ -4,6 +4,7 @@ import GetShortURL from "../components/GetShortURL"
 import InactiveAccount from "../components/InactiveAccount"
 import AllShortURL from "../components/AllShortURL";
 import { API } from "../helpers/API";
+import ShortUrlCharts from "../components/ShortUrlCharts";
 
 const Dashboard = () => {
   const [inac, setInac] = useState(false);
@@ -41,6 +42,12 @@ const Dashboard = () => {
         />
       </div>
       
+      <div className="flex flex-col flex-wrap items-center justify-around w-4/5 px-8 py-4 mx-auto md:flex-row">
+        <ShortUrlCharts  
+        shortUrlData = {shortUrlData}
+        />
+      </div>
+
       <div className="mt-8">
         <AllShortURL 
         shortUrlData = {shortUrlData}
