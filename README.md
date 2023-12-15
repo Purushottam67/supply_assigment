@@ -6,8 +6,8 @@
 
 ### SignUp
 - In SignUp page new user is registered in the database and a Inactive account is created
-  - And a Temporary activation code is send to the user email using __node mailer__ the lick have a expirey time of 2 Days
-  - when user click the activation link there account is activated
+- And a Temporary activation code is send to the user email using __node mailer__ the lick have a expirey time of 2 Days
+- when user click the activation link there account is activated
 ### Login
   - when user entered a data , checks if the user existed in the database
   - if there is no user found or account is not activated user will not be allowed to logged in
