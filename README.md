@@ -34,4 +34,4 @@
 - [BackEnd](https://github.com/Praveen8161/urlshortener-backend.git)
 
 ## Live Site
-- [Live Site](https://serene-douhua-9e2d21.netlify.app/)
+- [Live Site](url-shortener-8161.netlify.app/)
