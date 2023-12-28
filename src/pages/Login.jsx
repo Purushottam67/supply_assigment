@@ -1,55 +1,54 @@
 import { useState } from "react";
-import FrontComponent from "../components/FrontComponent"
+import FrontComponent from "../components/FrontComponent";
 import { API } from "../helpers/API";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-
-  const pgHeading = 'Login' ;
-  const [response, setResponse] = useState('');
+  const pgHeading = "Login";
+  const [response, setResponse] = useState("");
 
   const navigate = useNavigate();
-  const URL = `${API}/login/user` ;
+  const URL = `${API}/login/user`;
 
-  async function handleClick(user){
+  async function handleClick(user) {
     // check for empty data
-    if(!user.email || !user.password){
-      setResponse({error: 'Fields are required'})
-      return 
+    if (!user.email || !user.password) {
+      setResponse({ error: "Fields are required" });
+      return;
     }
-
+    setResponse({ temp_message: "Checking User..." });
     // validate user
     fetch(URL, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(user)
+      body: JSON.stringify(user),
     })
-    .then((data) => data.json())
-    .then((data) => {
-      if(data.error) setResponse(() => data);
-      if(data.data){
-        setResponse(() => data);
+      .then((data) => data.json())
+      .then((data) => {
+        if (data.error) setResponse(() => data);
+        if (data.data) {
+          setResponse(() => data);
 
-        localStorage.setItem('user_token', data.sessionToken)
+          localStorage.setItem("user_token", data.sessionToken);
 
-        navigate(`/dashboard`, {replace: true})
-      }
-    })
-    .catch((err) => console.log(err))
+          navigate(`/dashboard`, { replace: true });
+        }
+      })
+      .catch((err) => console.log(err));
   }
 
   return (
     <div className="flex items-center justify-center h-screen bg-slate-600">
       <FrontComponent
-      pgHeading = {pgHeading}
-      response = {response}
-      setResponse = {setResponse}
-      handleClick = {handleClick}
+        pgHeading={pgHeading}
+        response={response}
+        setResponse={setResponse}
+        handleClick={handleClick}
       />
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;
