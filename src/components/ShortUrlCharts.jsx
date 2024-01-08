@@ -89,123 +89,109 @@ const ShortUrlCharts = ({ shortUrlData }) => {
   const { dayNames, monthNames } = groupByDay(shortUrlData);
 
   return (
-    <div className="w-full min-h-max md:h-[250px] mt-5 m-w-[250px] flex md:flex-row flex-col gap-5 justify-around">
-      <div className="w-full h-full md:w-2/5 bg-slate-400">
-        <Bar
-          data={{
-            labels: dayNames.map((val) => {
-              for (let k in val) {
-                return k;
-              }
-            }),
-            datasets: [
-              {
-                label: "URL count Day",
-                data: dayNames.map((obj) => {
-                  for (let k of Object.values(obj)) {
-                    return k;
-                  }
-                }),
-                borderColor: "black",
-                borderRadius: 5,
+    <div className="flex flex-col md:flex-row gap-5 justify-around mt-5">
+    {/* Daily Bar Chart */}
+    <div className="w-full md:w-2/5 bg-slate-400 p-4 rounded-lg">
+      <Bar
+        data={{
+          labels: dayNames.map((val) => Object.keys(val)[0]),
+          datasets: [
+            {
+              label: "URL count Day",
+              data: dayNames.map((obj) => Object.values(obj)[0]),
+              backgroundColor: [
+                "rgba(255, 99, 132, 0.7)", // Red
+                "rgba(54, 162, 235, 0.7)", // Blue
+                "rgba(255, 206, 86, 0.7)", // Yellow
+                "rgba(75, 192, 192, 0.7)", // Green
+                "rgba(153, 102, 255, 0.7)", // Purple
+                "rgba(255, 159, 64, 0.7)", // Orange
+                "rgba(201, 203, 202, 0.7)", // Grey
+              ],
+              borderColor: "rgba(0, 0, 0, 0)",
+              borderWidth: 1,
+            },
+          ],
+        }}
+        options={{
+          scales: {
+            x: {
+              ticks: {
+                fontStyle: "bold",
+                color: "black",
+              },
+            },
+            y: {
+              beginAtZero: true,
+              ticks: {
+                fontStyle: "bold",
+                color: "black",
+              },
+            },
+          },
+          plugins: {
+            legend: {
+              labels: {
+                fontStyle: "bold",
                 color: "white",
-                backgroundColor: [
-                  "rgba(255, 99, 132)", // Red
-                  "rgba(54, 162, 235)", // Blue
-                  "rgba(255, 206, 86)", // Yellow
-                  "rgba(75, 192, 192)", // Green
-                  "rgba(153, 102, 255)", // Purple
-                  "rgba(255, 159, 64)", // Orange
-                  "rgba(201, 203, 202)", // Grey
-                ],
-              },
-            ],
-          }}
-          options={{
-            scales: {
-              x: {
-                ticks: {
-                  fontStyle: "bold",
-                  color: "black",
-                },
-              },
-              y: {
-                ticks: {
-                  fontStyle: "bold",
-                  color: "black",
-                },
               },
             },
-            plugins: {
-              legend: {
-                labels: {
-                  fontStyle: "bold",
-                  color: "white",
-                },
-              },
-            },
-          }}
-        />
-      </div>
-
-      <div className="w-full h-full md:w-2/5 bg-slate-400">
-        <Bar
-          data={{
-            labels: monthNames.map((val) => {
-              for (let k in val) {
-                return k;
-              }
-            }),
-            datasets: [
-              {
-                label: "URL count Month",
-                data: monthNames.map((obj) => {
-                  for (let k of Object.values(obj)) {
-                    return k;
-                  }
-                }),
-                borderColor: "black",
-                borderRadius: 5,
-                color: "white",
-                backgroundColor: [
-                  "rgba(255, 99, 132)", // Red
-                  "rgba(54, 162, 235)", // Blue
-                  "rgba(255, 206, 86)", // Yellow
-                  "rgba(75, 192, 192)", // Green
-                  "rgba(153, 102, 255)", // Purple
-                  "rgba(255, 159, 64)", // Orange
-                  "rgba(201, 203, 202)", // Grey
-                ],
-              },
-            ],
-          }}
-          options={{
-            scales: {
-              x: {
-                ticks: {
-                  fontStyle: "bold",
-                  color: "black",
-                },
-              },
-              y: {
-                ticks: {
-                  fontStyle: "bold",
-                  color: "black",
-                },
-              },
-            },
-            plugins: {
-              legend: {
-                labels: {
-                  fontStyle: "bold",
-                  color: "white",
-                },
-              },
-            },
-          }}
-        />
-      </div>
+          },
+        }}
+      />
     </div>
+
+    {/* Monthly Bar Chart */}
+    <div className="w-full md:w-2/5 bg-slate-400 p-4 rounded-lg">
+      <Bar
+        data={{
+          labels: monthNames.map((val) => Object.keys(val)[0]),
+          datasets: [
+            {
+              label: "URL count Month",
+              data: monthNames.map((obj) => Object.values(obj)[0]),
+              backgroundColor: [
+                "rgba(255, 99, 132, 0.7)", // Red
+                "rgba(54, 162, 235, 0.7)", // Blue
+                "rgba(255, 206, 86, 0.7)", // Yellow
+                "rgba(75, 192, 192, 0.7)", // Green
+                "rgba(153, 102, 255, 0.7)", // Purple
+                "rgba(255, 159, 64, 0.7)", // Orange
+                "rgba(201, 203, 202, 0.7)", // Grey
+              ],
+              borderColor: "rgba(0, 0, 0, 0)",
+              borderWidth: 1,
+            },
+          ],
+        }}
+        options={{
+          scales: {
+            x: {
+              ticks: {
+                fontStyle: "bold",
+                color: "black",
+              },
+            },
+            y: {
+              beginAtZero: true,
+              ticks: {
+                fontStyle: "bold",
+                color: "black",
+              },
+            },
+          },
+          plugins: {
+            legend: {
+              labels: {
+                fontStyle: "bold",
+                color: "white",
+              },
+            },
+          },
+        }}
+      />
+    </div>
+  </div>
   );
 };
 

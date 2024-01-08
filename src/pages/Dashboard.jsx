@@ -34,38 +34,43 @@ const Dashboard = () => {
   },[]);
 
   return (
-    <div className="relative">
-      <div>
-        <GetShortURL 
-        setInac = {setInac}
-        setShortUrlData = {setShortUrlData}
-        />
+    <div
+      className="min-h-screen bg-cover bg-center flex flex-col items-center justify-center relative"
+      style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1484503793037-5c9644d6a80a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8OHx8fGVufDB8fHx8fA%3D%3D")' }}
+    >
+      {/* Short URL Input Section */}
+      <div className="mb-8">
+        <GetShortURL setInac={setInac} setShortUrlData={setShortUrlData} />
       </div>
+
+      {/* Charts Section */}
+      <div className="flex flex-col md:flex-row items-center justify-around w-full p-4">
+        <ShortUrlCharts shortUrlData={shortUrlData} />
+      </div>
+
+      {/* All Short URLs Section */}
+      <div className="mb-8">
+        <AllShortURL shortUrlData={shortUrlData} />
+      </div>
+
+      {/* Inactive Account Modal */}
+      {inac && (
+        <div className="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-blue bg-opacity-50">
+          <InactiveAccount setInac={setInac} />
+        </div>
+      )}
+
+      {/* Your content goes here */}
       
-      <div className="flex flex-col flex-wrap items-center justify-around w-4/5 px-8 py-4 mx-auto md:flex-row">
-        <ShortUrlCharts  
-        shortUrlData = {shortUrlData}
-        />
-      </div>
 
-      <div className="mt-8">
-        <AllShortURL 
-        shortUrlData = {shortUrlData}
-        />
-      </div>
 
-      {
-        inac ? 
-        (
-          <div className="fixed flex justify-center w-screen bg-transparent top-5">
-            <InactiveAccount 
-            setInac = {setInac}
-            />
-          </div>
-        ) :
-        ''
-      }
+      <br />
+      <br />
+      <h1 className="text-2xl text-blue-500 absolute bottom-4">
+        Created by Purushottam Mishra 🧑‍💻🧑‍💻🧑‍💻🧑‍💻
+      </h1>
     </div>
+   
   )
 }
 

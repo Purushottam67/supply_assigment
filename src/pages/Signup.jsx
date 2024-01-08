@@ -35,7 +35,7 @@ const Signup = () => {
   }
 
   return (
-    <div className="flex items-center justify-center h-screen bg-slate-600">
+    <div className="h-screen bg-cover bg-center bg-no-repeat flex items-center justify-center" style={{backgroundImage: 'url("https://images.unsplash.com/photo-1484503793037-5c9644d6a80a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8OHx8fGVufDB8fHx8fA%3D%3D")'}}>
       <FrontComponent
       pgHeading = {pgHeading}
       handleClick = {handleClick}
