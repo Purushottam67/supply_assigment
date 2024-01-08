@@ -31,7 +31,7 @@
   - Chart.js
 
 ## Back End Code
-- [BackEnd](https://github.com/Praveen8161/urlshortener-backend.git)
+- [BackEnd(https://github.com/Purushottam67/urlshortener-backend-main?tab=readme-ov-file)
 
 ## Live Site
-- [Live Site](https://url-shortener-8161.netlify.app/)
+- [Live Site])
